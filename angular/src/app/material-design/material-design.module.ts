@@ -10,9 +10,11 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatRadioModule} from '@angular/material/radio'
 import {MatSelectModule} from '@angular/material/select'
 import {MatNativeDateModule} from '@angular/material/core'
-import {MatDatepicker, MatDatepickerModule} from '@angular/material/datepicker'
-
-@NgModule({
+import { MatPaginatorModule} from '@angular/material/paginator'
+import {MatDatepickerModule} from '@angular/material/datepicker'
+import { MatSortModule } from '@angular/material/sort';
+import { MatTableModule } from '@angular/material/table';
+  @NgModule({
   declarations: [],
   imports: [
     CommonModule,
@@ -26,7 +28,10 @@ import {MatDatepicker, MatDatepickerModule} from '@angular/material/datepicker'
     MatRadioModule,
     MatSelectModule,
     MatNativeDateModule,
-    MatDatepickerModule
+    MatDatepickerModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatTableModule
   ],
   exports: [
     MatButtonModule,
@@ -39,7 +44,10 @@ import {MatDatepicker, MatDatepickerModule} from '@angular/material/datepicker'
     MatRadioModule,
     MatSelectModule,
     MatNativeDateModule,
-    MatDatepickerModule
+    MatDatepickerModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatTableModule
   ],
 })
 export class MaterialDesignModule {}

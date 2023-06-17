@@ -4,7 +4,7 @@ export class Human {
     email!: string;
     mobile!: number;
     weigth!: number;
-    height!: number;
+    heigth!: number;
     sexe!: string;
     food!: string;
     tasks!: string;

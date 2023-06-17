@@ -1,6 +1,8 @@
+import { HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { Human } from 'src/app/models/Human';
 import { ApiService } from 'src/app/services/api.service';
 
 @Component({
@@ -9,6 +11,7 @@ import { ApiService } from 'src/app/services/api.service';
   styleUrls: ['./create-registration.component.css'],
 })
 export class CreateRegistrationComponent implements OnInit {
+  arr:string[]=[];
   season: string = '';
   genders: string[] = ['Male', 'Female'];
   foods: string[] = ['haricot', 'salade', 'ayimolou', 'couscous', 'fufu'];
@@ -21,7 +24,7 @@ export class CreateRegistrationComponent implements OnInit {
   ];
   bmi: Number = 0;
   public registerForm!: FormGroup;
-  constructor(private fb: FormBuilder,private service:ApiService,private toastr: ToastrService) {}
+  constructor(private fb: FormBuilder, private service: ApiService, private toastr: ToastrService) { }
   ngOnInit(): void {
     this.registerForm = this.fb.group({
       firstName: ['', [Validators.required, Validators.minLength(10)]],
@@ -32,7 +35,7 @@ export class CreateRegistrationComponent implements OnInit {
         '',
         [Validators.required,],
       ],
-      height: [
+      heigth: [
         '',
         [Validators.required],
       ],
@@ -44,11 +47,30 @@ export class CreateRegistrationComponent implements OnInit {
     this.tasks
   }
 
+  
+
   register() {
-    console.log('hello');
-    this.service.postRegistration(this.registerForm.value).subscribe(
-      res =>{
-        this.toastr.success("SUCESS");
+    console.log(this.registerForm.value);
+    
+    const human: Human = this.registerForm.value;
+    this.arr = Array.from(human.tasks);
+    console.log(human);
+    this.arr.forEach(value =>{
+      human.tasks = human.tasks+value+',';
+      console.log(human.tasks);
+    })
+    this.service.postRegistration(human).subscribe(
+      // res => {
+      //   this.toastr.success("SUCESS");
+      // }
+
+      {
+        next: (response) => {
+          this.toastr.success("SUCESS"+response);
+        },
+        error: (error) => {
+          this.toastr.error("ERROR"+error);
+        },
       }
     );
   }

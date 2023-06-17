@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Human } from '../models/Human';
 
@@ -10,7 +10,9 @@ export class ApiService {
   constructor(private http:HttpClient) { }
 
   postRegistration(register:Human){
-    return this.http.post<Human>(`${this.baseUrl}`+"/register",JSON.stringify(register));
+    const httpOptions = {headers: new HttpHeaders({'Content-Type':'application/json'})}
+
+    return this.http.post<Human>(`${this.baseUrl}`+"/register",JSON.stringify(register),httpOptions);
   }
 
   getAllHumans(){
