@@ -12,15 +12,20 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.simple.crud.models.Human;
 import com.simple.crud.services.HumanService;
 
+import jakarta.validation.Valid;
+
 @RestController
+@RequestMapping("/human")
 public class HumanController {
     @Autowired
     HumanService service;
+    
     // NOTE: affichage de index
     @GetMapping
     public ResponseEntity<List<Human>> index() {
@@ -33,7 +38,7 @@ public class HumanController {
     }
 
     @PostMapping(value="/register")
-    public ResponseEntity<Human> addUEntity(@RequestBody Human human) {
+    public ResponseEntity<Human> addUEntity(@RequestBody @Valid Human human) {
         try {
 			this.service.addHuman(human);
 			return ResponseEntity.status(HttpStatus.CREATED).body(human);
@@ -48,7 +53,7 @@ public class HumanController {
         Human human = this.service.findById(id);
         try {
                     this.service.deleteHuman(human);
-                    return ResponseEntity.status(HttpStatus.OK).body(human);
+                    return ResponseEntity.status(HttpStatus.ACCEPTED).body(human);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }

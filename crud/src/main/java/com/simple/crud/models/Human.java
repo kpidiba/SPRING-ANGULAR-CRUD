@@ -1,21 +1,27 @@
 package com.simple.crud.models;
 
+import org.hibernate.validator.constraints.Length;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 
 @Entity
 public class Human {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @NotBlank(message = "first name not blank")
+    @Length(min = 5,max = 30,message = "Human name between 5 - 30")
     private String firstName;
     private String lastName;
     private String email;
     private String mobile;
-    private int weigth;
-    private int heigth;
+    private float weigth;
+    private float heigth;
     private String sexe;
     private String food;
     private String tasks;
@@ -25,8 +31,11 @@ public class Human {
         super();
     }
 
-    public Human(Integer id, String firstName, String lastName, String email, String mobile, int weigth, int heigth,
-            String sexe, String food, String tasks, String date) {
+    
+    public Human(Integer id,
+            @NotBlank(message = "first name not blank") @Length(min = 5, max = 30, message = "Human name between 5 - 30") String firstName,
+            String lastName, String email, String mobile, float weigth, float heigth, String sexe, String food,
+            String tasks, String date) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -39,6 +48,7 @@ public class Human {
         this.tasks = tasks;
         this.date = date;
     }
+
 
     public Integer getId() {
         return id;
@@ -80,7 +90,7 @@ public class Human {
         this.mobile = mobile;
     }
 
-    public int getWeigth() {
+    public float getWeigth() {
         return weigth;
     }
 
@@ -88,7 +98,7 @@ public class Human {
         this.weigth = weigth;
     }
 
-    public int getHeigth() {
+    public float getHeigth() {
         return heigth;
     }
 
