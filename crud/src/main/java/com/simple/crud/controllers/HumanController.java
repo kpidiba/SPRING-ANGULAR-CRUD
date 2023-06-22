@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,6 +23,7 @@ import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/human")
+@CrossOrigin
 public class HumanController {
     @Autowired
     HumanService service;
@@ -37,10 +39,20 @@ public class HumanController {
         }
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Human> getHumanById(@PathVariable("id") Integer id) {
+        try {
+            Human human  = this.service.findById(id);
+            return ResponseEntity.of(Optional.of(human));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
     @PostMapping(value="/register")
     public ResponseEntity<Human> addUEntity(@RequestBody @Valid Human human) {
         try {
-			this.service.addHuman(human);
+			this.service.addHuman(human); 
 			return ResponseEntity.status(HttpStatus.CREATED).body(human);
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();

@@ -7,7 +7,7 @@
             <div class="col-md-6">
                 <mat-form-field appearance="outline" color="primary">
                     <mat-label>Last Name</mat-label>
-                    <input matInput formControlName="firstName" placeholder="Enter your last name"  />
+                    <input matInput formControlName="firstName" placeholder="Enter your last name" />
                     <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
                     <mat-hint>Hint</mat-hint>
                 </mat-form-field>
@@ -39,7 +39,7 @@
             <div class="col-md-3">
                 <mat-form-field appearance="outline" color="primary">
                     <mat-label>Weight</mat-label>
-                    <input matInput formControlName="weigth" placeholder="Enter the Weight"/>
+                    <input matInput formControlName="weigth" placeholder="Enter the Weight" />
                     <mat-icon matSuffix>email</mat-icon>
                     <mat-hint>Unit in Kgs</mat-hint>
                 </mat-form-field>
@@ -57,7 +57,7 @@
                 </mat-form-field>
             </div>
             <div class="col-md-3">
-                <mat-form-field >
+                <mat-form-field>
                     <mat-label>Tasks</mat-label>
                     <mat-select multiple formControlName="tasks">
                         <mat-option *ngFor="let task of tasks" [value]="task">
@@ -77,9 +77,15 @@
             <div class="col-md-6">
                 <label id="example-radio-group-label">Sexe</label>
                 <mat-radio-group class="example-radio-group" formControlName="sexe">
-                    <mat-radio-button  class="example-radio-button"
-                        *ngFor="let gender of genders" [value]="gender" color="warn" [checked]="gender">
+                    <!-- <mat-radio-button  class="example-radio-button"
+                        *ngFor="let gender of genders" [value]="gender" color="warn" [checked]="name">
                         {{ gender }}
+                    </mat-radio-button> -->
+                    <mat-radio-button class="example-radio-button" [value]="genders[0]" color="warn" >
+                        {{ genders[0] }}
+                    </mat-radio-button>
+                    <mat-radio-button class="example-radio-button" [value]="genders[1]" color="warn" >
+                        {{ genders[1] }}
                     </mat-radio-button>
                 </mat-radio-group>
             </div>
@@ -94,6 +100,7 @@
             </div>
         </div>
         <!-- <button mat-raised-button (click)="test()">TEST</button> -->
-        <button mat-raised-button [disabled]="registerForm.invalid" (click)="register()" class="mt-4" color="primary">SUBMIT</button>
+        <button mat-raised-button [disabled]="registerForm.invalid" (click)="register()" class="mt-4"
+            color="primary">SUBMIT</button>
     </form>
 </div>

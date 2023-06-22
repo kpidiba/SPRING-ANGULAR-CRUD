@@ -1,9 +1,10 @@
-import { Component, ViewChild ,OnInit} from '@angular/core';
+import { Component, ViewChild, OnInit } from '@angular/core';
 import { MatSort } from '@angular/material/sort'
 import { MatTableDataSource } from '@angular/material/table'
 import { MatPaginator } from '@angular/material/paginator'
 import { Human } from 'src/app/models/Human';
 import { ApiService } from 'src/app/services/api.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-registration-list',
   templateUrl: './registration-list.component.html',
@@ -14,19 +15,19 @@ export class RegistrationListComponent implements OnInit {
   public humans!: Human[];
   @ViewChild(MatPaginator) paginator !: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-  displayedColumns: string[] = ['firstName', 'lastName', 'email', 'weigth', 'heigth'/** , 'sexe', 'food', 'tasks', 'date' */];
-  constructor(private api:ApiService){
+  displayedColumns: string[] = ['firstName', 'lastName', 'email', 'weigth', 'heigth', 'sexe', 'food', 'action' ,/**  'tasks', 'date' */];
+  constructor(private api: ApiService, private route: Router) {
 
   }
   ngOnInit(): void {
     this.getHumans();
   }
 
-  getHumans(){
+  getHumans() {
     this.api.getAllHumans().subscribe(res => {
       this.humans = res;
       console.log(res);
-      
+
       this.dataSource = new MatTableDataSource(this.humans);
       this.dataSource.paginator;
       this.dataSource.sort = this.sort;
@@ -40,5 +41,13 @@ export class RegistrationListComponent implements OnInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  edit(id: number) {
+    this.route.navigate(['update', id]);
+  }
+
+  delete(id:number){
+    console.log(id);
   }
 }

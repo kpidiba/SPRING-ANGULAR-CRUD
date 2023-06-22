@@ -90,22 +90,6 @@ public class Human {
         this.mobile = mobile;
     }
 
-    public float getWeigth() {
-        return weigth;
-    }
-
-    public void setWeigth(int weigth) {
-        this.weigth = weigth;
-    }
-
-    public float getHeigth() {
-        return heigth;
-    }
-
-    public void setHeigth(int heigth) {
-        this.heigth = heigth;
-    }
-
     public String getSexe() {
         return sexe;
     }
@@ -138,13 +122,26 @@ public class Human {
         this.date = date;
     }
 
+    public float getWeigth() {
+        return weigth;
+    }
+
+    public void setWeigth(float weigth) {
+        this.weigth = weigth;
+    }
+
+    public float getHeigth() {
+        return heigth;
+    }
+
+    public void setHeigth(float heigth) {
+        this.heigth = heigth;
+    }
+
     @Override
     public String toString() {
         return "Human [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
                 + ", mobile=" + mobile + ", weigth=" + weigth + ", heigth=" + heigth + ", sexe=" + sexe + ", food="
                 + food + ", tasks=" + tasks + ", date=" + date + "]";
     }
-
-    
-    
 }

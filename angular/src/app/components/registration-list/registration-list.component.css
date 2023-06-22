@@ -1,0 +1,29 @@
+.responsive-container {
+  overflow-x: auto; /* Enable horizontal scrolling on small screens */
+}
+
+/* Apply responsive styles for screens with a maximum width of 600px */
+@media (max-width: 600px) {
+  .responsive-container {
+    /* Adjust table layout for small screens */
+    overflow-x: auto; /* Enable horizontal scrolling */
+    display: block;
+  }
+
+  .responsive-container mat-header-cell,
+  .responsive-container mat-cell {
+    display: block;
+    text-align: center;
+  }
+
+  .responsive-container mat-header-cell {
+    font-weight: bold;
+  }
+
+  .responsive-container mat-header-cell,
+  .responsive-container mat-cell,
+  .responsive-container mat-footer-cell {
+    border-bottom: 1px solid black;
+    padding: 5px;
+  }
+}
